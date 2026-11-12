@@ -23,7 +23,7 @@ function Inputs(props: InputsProps<Vals>) {
   return (
     <div className="flex flex-col gap-6">
       <Segmented label={t("gst.mode")} value={mode} onChange={(m) => props.onChange({ ...props.value, inclusive: m === "inc" ? 1 : 0 })}
-        options={[{ value: "exc", label: t("gst.exclusive") }, { value: "inc", label: t("gst["inclusive"]") }]} />
+        options={[{ value: "exc", label: t("gst.exclusive") }, { value: "inc", label: t("gst.inclusive") }]} />
       <exc.Inputs {...props} />
     </div>
   );
