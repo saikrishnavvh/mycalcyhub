@@ -1,23 +1,38 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Badge, Button, Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/design-system/minimal-and-sleek-69c4a4";
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "CalcHub — Every calculator in one place" },
+      { name: "description", content: "Fast, private calculators that run entirely in your browser." },
+      { property: "og:title", content: "CalcHub — Every calculator in one place" },
+      { property: "og:description", content: "Fast, private calculators that run entirely in your browser." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="mx-auto flex min-h-screen max-w-2xl flex-col justify-center gap-12 px-6 py-12">
+      <div className="flex flex-col gap-4">
+        <Badge variant="outline">Coming soon</Badge>
+        <h1 className="text-5xl font-semibold tracking-tight">CalcHub</h1>
+        <p className="text-lg text-muted-foreground">Every calculator you need, calm and quick.</p>
+      </div>
+      <Card variant="soft" padding="lg">
+        <CardHeader>
+          <CardTitle>Loan EMI</CardTitle>
+          <CardDescription>Monthly payment, total interest and a full schedule.</CardDescription>
+        </CardHeader>
+        <CardFooter>
+          <Button variant="ghost">Percentage</Button>
+          <Button>Open</Button>
+        </CardFooter>
+      </Card>
+    </main>
   );
 }
