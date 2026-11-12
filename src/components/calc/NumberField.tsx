@@ -45,8 +45,13 @@ export function NumberField({ label, value, onChange, numberFormat, error, hint,
   const [text, setText] = useState(() => toText(value, numberFormat));
   const [focused, setFocused] = useState(false);
 
+  // Re-sync whenever the value changes from outside (Reset, slider), even if the box still has focus
+  // (Safari/iOS don't blur the box when a button is tapped). While typing, the parsed text already equals value.
   useEffect(() => {
-    if (!focused) setText(toText(value, numberFormat));
+    setText((cur) => {
+      const same = Object.is(parseLocalized(cur, numberFormat), value) || (Number.isNaN(value) && Number.isNaN(parseLocalized(cur, numberFormat)));
+      return focused && same ? cur : toText(value, numberFormat);
+    });
   }, [value, numberFormat, focused]);
 
   return (
