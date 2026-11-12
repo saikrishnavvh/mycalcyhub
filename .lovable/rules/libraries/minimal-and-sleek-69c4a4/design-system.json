@@ -1,0 +1,461 @@
+{
+  "meta": {
+    "name": "Minimal and sleek",
+    "package": "@ws-ttcquy096n7twgudnwge/69f5ae88-5b96-4d44-9450-36360ced11fd",
+    "version": "1.0.0",
+    "framework": "react",
+    "css_framework": "tailwind",
+    "starter_template": "custom_design_system",
+    "theme_files": [
+      "src/styles.css"
+    ],
+    "source_type": "local",
+    "source_manifest": {
+      "#enrichment": "15a2771b030e2ce41c18bba17ae3e65eabd2c38ccd5d55f0cd34c48afa767396",
+      ".dsignore": "2c7d76468c15bc0f1499420154f01ae3",
+      ".gitignore": "6059213806e442947666752f3db6bfdc",
+      ".lovable/meta.yaml": "8ec7245def9c0ef39976dd2bc212ff0a",
+      ".lovable/project.json": "be4e88f5198eb40dde1e210a17154016",
+      ".lovable/sources.yaml": "d60f4c15e1261caabb4a28841c7246e9",
+      ".lovable/system.md": "f711e9d63af2de0f74391e5824df5f45",
+      "AGENTS.md": "f32eddd16f88ecb7bb3f01ece63defe5",
+      "README.md": "219e70a5f6d3bcf9e4254d88e2c14a1c",
+      "bunfig.toml": "25f4c8696b22b0943db7191e0cdf7942",
+      "components.json": "30d3d035361ce807021f5c54620962e9",
+      "eslint.config.js": "07a67437fb1a45ab36d6de0145ff09de",
+      "lovable.toml": "956f55f44ff7952457c73fd1122d6bcd",
+      "mockupPreviewPlugin.ts": "331c56b72ab88e9510bdaf1f21f2370e",
+      "package.json": "34539439d2776d5231960c6d2f42a978",
+      "public/favicon.ico": "9f504444f85a5af2eef9264b02ae40be",
+      "src/components/ui/badge.tsx": "6dcb96ab90dbd330b2c0fb52f01b445f",
+      "src/components/ui/button.tsx": "061d294ff750019b1b61edbbf0f06493",
+      "src/components/ui/card.tsx": "3f6ea203d5047d473bd64e05caae9a88",
+      "src/components/ui/checkbox.tsx": "f7d4c3114a3cd4fcf3212a26e4a10ef0",
+      "src/components/ui/dialog.tsx": "c9536614b7359ce7f9bebc97583544c4",
+      "src/components/ui/field.tsx": "325fc5162862606bd93464d6bc0597ba",
+      "src/components/ui/input.tsx": "cb874ab4f433dd641b9650dc750aca20",
+      "src/components/ui/switch.tsx": "53e5d2099921c331918aecaf0d58ffaf",
+      "src/index.ts": "117f4c09b14f22c4ae4af5a02166d54a",
+      "src/lib/utils.ts": "d9837f38cc05303254571985e3164050",
+      "src/mockup-preview.d.ts": "ae9d81e2b8514e13fd59b5b6bece9a64",
+      "src/routeTree.gen.ts": "6345b72ae188277d47ca7b4c8b0ee106",
+      "src/router.tsx": "8f905e713b0eba7fa8148b7995a708c9",
+      "src/routes/[__component].preview.$.tsx": "e63e4b151fa738d36cb24710d2dbea18",
+      "src/routes/[__mockup].preview.$.tsx": "bc9ea23fc46521b323ef461c9e77ff48",
+      "src/routes/__root.tsx": "c5aa62535a276d62e771bedb9c3d9b4d",
+      "src/routes/_showcase.colors.tsx": "ff44953fdcfeca592977370565238b65",
+      "src/routes/_showcase.components.tsx": "d229bdc1c93704b6f7a660eee642bc28",
+      "src/routes/_showcase.index.tsx": "32da195842e280dfdc193c3f5570b817",
+      "src/routes/_showcase.tsx": "38d70b7b8a77569935979f3c8b2cb867",
+      "src/routes/_showcase.typography.tsx": "8bad2957d9ab4bc9256b19892094b2c8",
+      "src/showcase/shell.tsx": "931178bb38bb9faef6ddf89b5d822f54",
+      "src/styles.css": "09dd249f77c1067a4b4942a4e142618d",
+      "tsconfig.json": "5498ac94bab14bcff2c29aca84eba5b1",
+      "vite.config.ts": "2ad56ddcf2cf63319567ae6ffa363866",
+      "wrangler.jsonc": "680b897d48e44bcc65fe437c29b38f3b"
+    },
+    "pipeline_version": 8
+  },
+  "tokens": {
+    "color": [
+      {
+        "name": "--background",
+        "raw": "oklch(0.985 0.003 75)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--foreground",
+        "raw": "oklch(0.216 0.006 56)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--surface",
+        "raw": "oklch(0.97 0.004 75)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--card",
+        "raw": "oklch(1 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--card-foreground",
+        "raw": "oklch(0.216 0.006 56)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--popover",
+        "raw": "oklch(1 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--popover-foreground",
+        "raw": "oklch(0.216 0.006 56)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--primary",
+        "raw": "oklch(0.268 0.007 34)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--primary-foreground",
+        "raw": "oklch(0.985 0.003 75)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--secondary",
+        "raw": "oklch(0.955 0.005 75)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--secondary-foreground",
+        "raw": "oklch(0.268 0.007 34)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--muted",
+        "raw": "oklch(0.955 0.005 75)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--muted-foreground",
+        "raw": "oklch(0.553 0.013 58)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--accent",
+        "raw": "oklch(0.62 0.08 160)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--accent-foreground",
+        "raw": "oklch(0.99 0.005 160)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--success",
+        "raw": "oklch(0.56 0.09 160)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--success-foreground",
+        "raw": "oklch(0.99 0.005 160)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--success-soft",
+        "raw": "oklch(0.955 0.025 160)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--warning",
+        "raw": "oklch(0.6 0.11 70)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--warning-soft",
+        "raw": "oklch(0.96 0.03 80)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--destructive",
+        "raw": "oklch(0.56 0.15 28)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--destructive-foreground",
+        "raw": "oklch(0.99 0.005 28)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--destructive-soft",
+        "raw": "oklch(0.96 0.02 28)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--border",
+        "raw": "oklch(0.93 0.008 75)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--input",
+        "raw": "oklch(0.91 0.009 75)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--ring",
+        "raw": "oklch(0.62 0.08 160)",
+        "source": "src/styles.css"
+      }
+    ],
+    "typography": [
+      {
+        "name": "--font-sans",
+        "raw": "\"Inter\", ui-sans-serif, system-ui, sans-serif",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--font-mono",
+        "raw": "\"JetBrains Mono\", ui-monospace, monospace",
+        "source": "src/styles.css"
+      }
+    ],
+    "radius": [
+      {
+        "name": "--radius-sm",
+        "raw": "calc(var(--radius) - 4px)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--radius-md",
+        "raw": "calc(var(--radius) - 2px)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--radius-xl",
+        "raw": "calc(var(--radius) + 4px)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--radius-2xl",
+        "raw": "calc(var(--radius) + 8px)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--radius",
+        "raw": "0.5rem",
+        "source": "src/styles.css"
+      }
+    ],
+    "shadow": [
+      {
+        "name": "--shadow-whisper",
+        "raw": "0 1px 2px oklch(0.3 0.01 60 / 0.04)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--shadow-float",
+        "raw": "0 8px 24px -8px oklch(0.3 0.01 60 / 0.12), 0 1px 2px oklch(0.3 0.01 60 / 0.04)",
+        "source": "src/styles.css"
+      }
+    ],
+    "other": [
+      {
+        "name": "--ease-gentle",
+        "raw": "cubic-bezier(0.2, 0, 0, 1)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--duration-quick",
+        "raw": "120ms",
+        "source": "src/styles.css"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "file": "src/components/ui/button.tsx",
+      "import_path": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "primary",
+            "secondary",
+            "subtle",
+            "ghost",
+            "accent",
+            "destructive"
+          ],
+          "default": "primary"
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "sm",
+            "md",
+            "lg",
+            "icon"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "default": "false"
+        }
+      ]
+    },
+    {
+      "name": "Input",
+      "file": "src/components/ui/input.tsx",
+      "import_path": ""
+    },
+    {
+      "name": "Textarea",
+      "file": "src/components/ui/input.tsx",
+      "import_path": ""
+    },
+    {
+      "name": "Label",
+      "file": "src/components/ui/field.tsx",
+      "import_path": ""
+    },
+    {
+      "name": "Field",
+      "file": "src/components/ui/field.tsx",
+      "import_path": "",
+      "props": [
+        {
+          "name": "label",
+          "type": "any",
+          "required": true
+        },
+        {
+          "name": "htmlFor",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "hint",
+          "type": "any"
+        },
+        {
+          "name": "error",
+          "type": "any"
+        }
+      ]
+    },
+    {
+      "name": "Card",
+      "file": "src/components/ui/card.tsx",
+      "import_path": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "outline",
+            "soft",
+            "raised"
+          ],
+          "default": "outline"
+        },
+        {
+          "name": "padding",
+          "type": "enum",
+          "values": [
+            "none",
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        }
+      ]
+    },
+    {
+      "name": "CardHeader",
+      "file": "src/components/ui/card.tsx",
+      "import_path": ""
+    },
+    {
+      "name": "CardTitle",
+      "file": "src/components/ui/card.tsx",
+      "import_path": ""
+    },
+    {
+      "name": "CardDescription",
+      "file": "src/components/ui/card.tsx",
+      "import_path": ""
+    },
+    {
+      "name": "CardFooter",
+      "file": "src/components/ui/card.tsx",
+      "import_path": ""
+    },
+    {
+      "name": "Badge",
+      "file": "src/components/ui/badge.tsx",
+      "import_path": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "neutral",
+            "outline",
+            "success",
+            "warning",
+            "danger"
+          ],
+          "default": "neutral"
+        }
+      ]
+    },
+    {
+      "name": "Switch",
+      "file": "src/components/ui/switch.tsx",
+      "import_path": "",
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean"
+        },
+        {
+          "name": "defaultChecked",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "onCheckedChange",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "file": "src/components/ui/checkbox.tsx",
+      "import_path": ""
+    },
+    {
+      "name": "Dialog",
+      "file": "src/components/ui/dialog.tsx",
+      "import_path": "",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "onOpenChange",
+          "type": "function",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "any",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "any"
+        },
+        {
+          "name": "footer",
+          "type": "any"
+        }
+      ]
+    }
+  ]
+}
