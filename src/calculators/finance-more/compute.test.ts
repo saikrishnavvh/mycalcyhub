@@ -7,10 +7,10 @@ describe("finance formulas", () => {
   it("RD 5,000/month at 7% for 1 year ≈ 62,310 (bank quarterly method)", () => expect(c.rd({ monthly: 5000, rate: 7, years: 1 }).maturity).toBeCloseTo(62310, -1));
   it("simple interest 10,000 at 5% for 3 years = 1,500", () => expect(c.simple({ principal: 10000, rate: 5, years: 3 }).interest).toBe(1500));
   it("GST 18% on 1,000 adds 180; 1,180 incl. holds 180", () => {
-    expect(c.gst({ amount: 1000, taxRate: 18 }).taxAdded).toBe(180);
-    expect(c.gst({ amount: 1180, taxRate: 18 }).taxIncluded).toBeCloseTo(180, 6);
-    expect(c.gstInclusive({ amount: 1180, taxRate: 18 }).netOfTax).toBeCloseTo(1000, 6);
-    expect(c.gstInclusive({ amount: 1180, taxRate: 18 }).taxIncluded).toBeCloseTo(180, 6);
+    expect(c.gst({ amount: 1000, taxRate: 18 }).tax).toBe(180);
+    expect(c.gst({ amount: 1000, taxRate: 18 }).total).toBe(1180);
+    expect(c.gst({ amount: 1180, taxRate: 18, inclusive: 1 }).net).toBeCloseTo(1000, 6);
+    expect(c.gst({ amount: 1180, taxRate: 18, inclusive: 1 }).tax).toBeCloseTo(180, 6);
   });
   it("20% off 500 = 400", () => expect(c.discount({ price: 500, discountRate: 20 }).finalPrice).toBe(400));
   it("CAGR doubling in 5 years ≈ 14.87%", () => expect(c.cagr({ startValue: 100, endValue: 200, years: 5 }).cagr).toBeCloseTo(14.87, 2));

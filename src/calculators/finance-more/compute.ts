@@ -33,15 +33,11 @@ export function simple(v: V) {
   const p = n(v, "principal"), interest = (p * n(v, "rate") * n(v, "years")) / 100;
   return { maturity: p + interest, interest };
 }
-/** Both directions: tax added on top, and tax already inside the amount. */
+/** inclusive=1: tax is already inside the amount; otherwise tax is added on top. */
 export function gst(v: V) {
-  const a = n(v, "amount"), r = n(v, "taxRate"), tax = (a * r) / 100, net = a / (1 + r / 100);
-  return { totalWithTax: a + tax, taxAdded: tax, netOfTax: net, taxIncluded: a - net };
-}
-/** Tax already inside the amount: split it into price before tax and the tax part. */
-export function gstInclusive(v: V) {
-  const a = n(v, "amount"), r = n(v, "taxRate"), net = a / (1 + r / 100);
-  return { netOfTax: net, taxIncluded: a - net, halfTax: (a - net) / 2, amount: a };
+  const a = n(v, "amount"), r = n(v, "taxRate"), inc = n(v, "inclusive") === 1;
+  const net = inc ? a / (1 + r / 100) : a, tax = inc ? a - net : (a * r) / 100;
+  return { total: net + tax, net, tax, halfTax: tax / 2 };
 }
 export function discount(v: V) {
   const p = n(v, "price"), saving = (p * n(v, "discountRate")) / 100;

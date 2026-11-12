@@ -1,7 +1,8 @@
-import { BadgePercent, CalendarClock, Landmark, LineChart, PiggyBank, Receipt, Sprout, Tag, TrendingUp, Wallet } from "lucide-react";
+import { CalendarClock, Landmark, LineChart, PiggyBank, Receipt, Sprout, Tag, TrendingUp, Wallet } from "lucide-react";
 import { t } from "@/i18n";
 import { simpleCalculator, type FieldSpec } from "../kit/simple";
 import * as c from "./compute";
+import { gstCalculator } from "./gst";
 
 const money = (key: string, max = 100_000_000): FieldSpec => ({ key, kind: "money", positive: true, slider: { min: 0, max: Math.min(max, 10_000_000), step: max > 1_000_000 ? 10_000 : 500 } });
 const rate = (key = "rate", max = 50): FieldSpec => ({ key, kind: "percent", max, slider: { min: 0, max, step: 0.1 } });
@@ -34,12 +35,7 @@ export const financeMore = [
   simpleCalculator({ id: "simple-interest", category: "finance", subcategory: dep, icon: Receipt, keywords: ["simple interest", "interest"],
     fields: [money("principal"), rate("rate", 50), years], defaults: { principal: 100000, rate: 8, years: 5 },
     compute: c.simple, outputs: [{ key: "interest", kind: "money" }, { key: "maturity", kind: "money" }], related: ["compound-interest", "loan-emi"] }),
-  simpleCalculator({ id: "gst", category: "finance", subcategory: shop, icon: BadgePercent, keywords: ["gst", "vat", "sales tax", "tax"],
-    fields: [money("amount"), rate("taxRate", 100)], defaults: { amount: 1000, taxRate: 18 },
-    compute: c.gst, outputs: [{ key: "totalWithTax", kind: "money" }, { key: "taxAdded", kind: "money" }], related: ["gst-inclusive", "discount"] }),
-  simpleCalculator({ id: "gst-inclusive", category: "finance", subcategory: shop, icon: BadgePercent, keywords: ["gst inclusive", "tax included", "reverse gst", "vat inclusive", "mrp"],
-    fields: [money("amount"), rate("taxRate", 100)], defaults: { amount: 1180, taxRate: 18 },
-    compute: c.gstInclusive, outputs: [{ key: "netOfTax", kind: "money" }, { key: "taxIncluded", kind: "money" }, { key: "halfTax", kind: "money" }], related: ["gst", "discount"] }),
+  gstCalculator,
   simpleCalculator({ id: "discount", category: "finance", subcategory: shop, icon: Tag, keywords: ["discount", "sale", "off", "price"],
     fields: [money("price"), rate("discountRate", 100)], defaults: { price: 2000, discountRate: 25 },
     compute: c.discount, outputs: [{ key: "finalPrice", kind: "money" }, { key: "saving", kind: "money" }], related: ["gst", "percentage"] }),
