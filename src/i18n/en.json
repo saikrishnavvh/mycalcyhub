@@ -13,6 +13,8 @@
   "nav.expand": "Expand menu",
   "home.title": "What do you want to calculate?",
   "home.searchPlaceholder": "Try “EMI”, “loan” or “percent”",
+  "home.h1": "Free online calculators for loans, investments, tax, units and dates",
+  "home.lead": "Quick, private answers that are worked out right in your browser.",
   "home.recent": "Recently used",
   "home.noResults": "No calculators match “{q}”.",
   "category.finance": "Finance",

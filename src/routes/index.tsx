@@ -27,6 +27,10 @@ function Index() {
 
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-16 px-4 py-12 sm:px-6 sm:py-20">
+      <header className="flex flex-col gap-3">
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{t("home.h1")}</h1>
+        <p className="text-muted-foreground">{t("home.lead")}</p>
+      </header>
           {recent.length > 0 && (
             <section className="flex flex-col gap-4">
               <h2 className="text-sm font-medium text-muted-foreground">{t("home.recent")}</h2>
