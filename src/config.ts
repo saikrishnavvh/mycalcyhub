@@ -2,7 +2,7 @@
 const env = import.meta.env;
 
 export const config = {
-  appName: env["VITE_APP_NAME"] || "CalcHub",
+  appName: env["VITE_APP_NAME"] || "My Calcy Hub",
   /** Informational only: the theme accent lives in the design system tokens. */
   accentColor: env["VITE_ACCENT_COLOR"] || "sage",
   siteUrl: (env["VITE_SITE_URL"] || "https://mycalcyhub.lovable.app").replace(/\/$/, ""),

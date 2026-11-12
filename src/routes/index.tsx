@@ -9,9 +9,9 @@ import { getRecent, latestRecent } from "@/lib/storage";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CalcHub – Free online calculators in one place" },
+      { title: "My Calcy Hub – Free online calculators in one place" },
       { name: "description", content: t("app.description") },
-      { property: "og:title", content: "CalcHub – Free online calculators in one place" },
+      { property: "og:title", content: "My Calcy Hub – Free online calculators in one place" },
       { property: "og:description", content: t("app.description") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

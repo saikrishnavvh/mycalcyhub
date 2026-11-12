@@ -1,4 +1,4 @@
-# CalcHub
+# My Calcy Hub
 
 A lightweight, mobile-first collection of calculators. No backend, no login, no database — every calculation runs in the browser.
 
@@ -15,7 +15,7 @@ Optional environment variables (`.env`):
 
 | Variable | Purpose |
 |---|---|
-| `VITE_APP_NAME` | App name (default `CalcHub`) |
+| `VITE_APP_NAME` | App name (default `My Calcy Hub`) |
 | `VITE_SITE_URL` | Public URL, used in the sitemap |
 | `VITE_GITHUB_URL` | Footer GitHub link |
 | `VITE_ADS_ENABLED` | `true` to show ad slots |

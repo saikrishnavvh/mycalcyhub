@@ -10,7 +10,7 @@ export function StaticPage({ k }: { k: string }) {
 }
 
 export function staticHead(k: string) {
-  const title = `${t(`page.${k}.title`)} – CalcHub`;
+  const title = `${t(`page.${k}.title`)} – My Calcy Hub`;
   const description = t(`page.${k}.body`);
   return { meta: [{ title }, { name: "description", content: description }, { property: "og:title", content: title }, { property: "og:description", content: description }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] };
 }

@@ -109,7 +109,7 @@ export function CalculatorShell({ calc }: { calc: CalculatorDefinition }) {
             <div aria-live="polite" aria-atomic="true">
               <Results input={shown.input} result={shown.result} ctx={ctx} />
             </div>
-            <p className="mt-6 text-xs text-muted-foreground">CalcHub · {calc.name}</p>
+            <p className="mt-6 text-xs text-muted-foreground">My Calcy Hub · {calc.name}</p>
             <div data-no-capture className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4 print:hidden">
               <Button variant="secondary" size="sm" onClick={copyImage} loading={imgState === "busy"}><ImageIcon className="size-4" aria-hidden />{imgState === "copied" ? t("shell.imageCopied") : imgState === "saved" ? t("shell.imageSaved") : t("shell.copyImage")}</Button>
               {calc.exportRows && <Button variant="secondary" size="sm" onClick={exportCsv}><Download className="size-4" aria-hidden />{t("shell.exportCsv")}</Button>}

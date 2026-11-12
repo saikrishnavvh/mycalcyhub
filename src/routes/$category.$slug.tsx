@@ -9,7 +9,7 @@ export const Route = createFileRoute("/$category/$slug")({
   },
   head: ({ params }) => {
     const c = getCalculator(params.category, params.slug);
-    if (!c) return { meta: [{ title: "Unavailable – CalcHub" }, { name: "robots", content: "noindex" }] };
+    if (!c) return { meta: [{ title: "Unavailable – My Calcy Hub" }, { name: "robots", content: "noindex" }] };
     return {
       meta: [
         { title: c.seo.title },

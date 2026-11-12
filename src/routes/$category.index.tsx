@@ -10,7 +10,7 @@ export const Route = createFileRoute("/$category/")({
   },
   head: ({ params }) => {
     const c = getCategory(params.category);
-    const title = c ? `${c.name} calculators – CalcHub` : "Not found – CalcHub";
+    const title = c ? `${c.name} calculators – My Calcy Hub` : "Not found – My Calcy Hub";
     const description = c?.description ?? "";
     return { meta: [{ title }, { name: "description", content: description }, { property: "og:title", content: title }, { property: "og:description", content: description }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, ...(c ? [] : [{ name: "robots", content: "noindex" }])] };
   },
