@@ -3,7 +3,7 @@ import { Landmark } from "lucide-react";
 import { Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 import { Button } from "@/design-system/minimal-and-sleek-69c4a4";
 import { t } from "@/i18n";
-import { formatCompact, formatMoney, formatNumber } from "@/lib/format";
+import { formatCompact, formatMoney, currencySymbol, formatNumber } from "@/lib/format";
 import { NumberField } from "@/components/calc/NumberField";
 import { Segmented } from "@/components/calc/Segmented";
 import { Stat } from "@/components/calc/Stat";
@@ -20,7 +20,7 @@ function Inputs({ value, onChange, errors, ctx }: InputsProps<LoanEmiInput>) {
         onChange={(principal) => onChange({ ...value, principal })}
         numberFormat={ctx.numberFormat}
         error={errors["principal"]}
-        prefix={ctx.currency}
+        prefix={currencySymbol(ctx.currency, ctx.numberFormat)}
         slider={{ min: 10_000, max: 10_000_000, step: 10_000 }}
       />
       <NumberField

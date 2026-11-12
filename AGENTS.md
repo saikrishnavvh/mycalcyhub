@@ -35,3 +35,5 @@ use the editor.
 - All UI strings go through `t()` from `src/i18n` backed by `en.json`, so new languages can be added later.
 - Numbers are formatted only via `src/lib/format.ts` (Intl.NumberFormat), so settings for currency/number format apply everywhere.
 - No backend: settings and recent calculators persist in localStorage with try/catch.
+
+- Left side menu lives in `src/components/layout/SideNav.tsx` and reads the registry tree; open/closed state is owned by `__root.tsx`, so every page shares one toggle.

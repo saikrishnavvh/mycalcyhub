@@ -8,7 +8,9 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { SideNav } from "@/components/layout/SideNav";
+import { readJSON, writeJSON } from "@/lib/storage";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -115,15 +117,24 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const [menuOpen, setMenuOpen] = useState(false);
+  // Desktop starts open (unless the user collapsed it before); phones start closed.
+  useEffect(() => { setMenuOpen(window.innerWidth >= 1024 && readJSON("calchub:menu", true)); }, []);
+  const toggleMenu = () => setMenuOpen((o) => { if (window.innerWidth >= 1024) writeJSON("calchub:menu", !o); return !o; });
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <SettingsProvider>
         <div className="flex min-h-screen flex-col">
-          <Header />
-          <div className="flex-1"><Outlet /></div>
-          <Footer />
+          <Header onToggleMenu={toggleMenu} menuOpen={menuOpen} />
+          <div className="flex flex-1">
+            <SideNav open={menuOpen} onClose={() => setMenuOpen(false)} />
+            <div className="flex min-w-0 flex-1 flex-col">
+              <div className="flex-1"><Outlet /></div>
+              <Footer />
+            </div>
+          </div>
         </div>
       </SettingsProvider>
     </QueryClientProvider>

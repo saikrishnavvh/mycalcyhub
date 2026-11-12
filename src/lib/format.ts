@@ -46,3 +46,14 @@ export function formatCompact(value: number, fmt: NumberFormatId = "en"): string
   if (abs < 1e5) return null;
   return new Intl.NumberFormat(localeFor(fmt), { notation: "compact", maximumFractionDigits: 1 }).format(v);
 }
+
+/** Currency symbol for the code in the given format, e.g. INR → ₹. Falls back to the code. */
+export function currencySymbol(currency = "USD", fmt: NumberFormatId = "en"): string {
+  try {
+    const part = new Intl.NumberFormat(localeFor(fmt), { style: "currency", currency, currencyDisplay: "narrowSymbol" })
+      .formatToParts(0).find((p) => p.type === "currency");
+    return part?.value ?? currency;
+  } catch {
+    return currency;
+  }
+}

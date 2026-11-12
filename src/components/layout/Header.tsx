@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Calculator, Search } from "lucide-react";
+import { Calculator, PanelLeft, Search } from "lucide-react";
 import { config } from "@/config";
 import { t } from "@/i18n";
 import { CommandPalette } from "./CommandPalette";
 import { HeaderSettings } from "./HeaderSettings";
 
-export function Header() {
+export function Header({ onToggleMenu, menuOpen }: { onToggleMenu: () => void; menuOpen: boolean }) {
   const [palette, setPalette] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,11 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background print:hidden">
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:px-6">
+      <div className="mx-auto flex h-16 items-center gap-2 px-4 sm:px-6">
+        <button type="button" onClick={onToggleMenu} aria-expanded={menuOpen} aria-label={menuOpen ? t("nav.collapse") : t("nav.expand")}
+          className="flex size-11 items-center justify-center rounded-md text-muted-foreground transition-colors duration-(--duration-quick) ease-(--ease-gentle) hover:bg-foreground/[0.04] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <PanelLeft className="size-5" aria-hidden />
+        </button>
         <Link to="/" className="flex min-h-11 items-center gap-2 font-semibold tracking-tight">
           <span className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground"><Calculator className="size-4" aria-hidden /></span>
           <span className="hidden sm:inline">{config.appName}</span>
