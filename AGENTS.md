@@ -37,3 +37,4 @@ use the editor.
 - No backend: settings and recent calculators persist in localStorage with try/catch.
 
 - Left side menu lives in `src/components/layout/SideNav.tsx` and reads the registry tree; open/closed state is owned by `__root.tsx`, so every page shares one toggle.
+- Formula-only calculators are built with `simpleCalculator()` in `src/calculators/kit/simple.tsx`; grouped folders (finance-more, units, dates) export arrays spread into the registry, so similar calculators share one component.
