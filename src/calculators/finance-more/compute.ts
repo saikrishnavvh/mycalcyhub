@@ -38,6 +38,11 @@ export function gst(v: V) {
   const a = n(v, "amount"), r = n(v, "taxRate"), tax = (a * r) / 100, net = a / (1 + r / 100);
   return { totalWithTax: a + tax, taxAdded: tax, netOfTax: net, taxIncluded: a - net };
 }
+/** Tax already inside the amount: split it into price before tax and the tax part. */
+export function gstInclusive(v: V) {
+  const a = n(v, "amount"), r = n(v, "taxRate"), net = a / (1 + r / 100);
+  return { netOfTax: net, taxIncluded: a - net, halfTax: (a - net) / 2, amount: a };
+}
 export function discount(v: V) {
   const p = n(v, "price"), saving = (p * n(v, "discountRate")) / 100;
   return { finalPrice: p - saving, saving };

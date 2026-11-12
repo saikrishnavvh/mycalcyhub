@@ -9,6 +9,8 @@ describe("finance formulas", () => {
   it("GST 18% on 1,000 adds 180; 1,180 incl. holds 180", () => {
     expect(c.gst({ amount: 1000, taxRate: 18 }).taxAdded).toBe(180);
     expect(c.gst({ amount: 1180, taxRate: 18 }).taxIncluded).toBeCloseTo(180, 6);
+    expect(c.gstInclusive({ amount: 1180, taxRate: 18 }).netOfTax).toBeCloseTo(1000, 6);
+    expect(c.gstInclusive({ amount: 1180, taxRate: 18 }).taxIncluded).toBeCloseTo(180, 6);
   });
   it("20% off 500 = 400", () => expect(c.discount({ price: 500, discountRate: 20 }).finalPrice).toBe(400));
   it("CAGR doubling in 5 years ≈ 14.87%", () => expect(c.cagr({ startValue: 100, endValue: 200, years: 5 }).cagr).toBeCloseTo(14.87, 2));
