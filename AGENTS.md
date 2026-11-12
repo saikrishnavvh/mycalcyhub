@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## CalcHub architecture
+- `src/calculators/registry.ts` is the single source for routes, cards, search, related links and sitemap; adding a calculator = new folder + one registry line, so no per-calculator route files.
+- Calculator `compute` functions are pure and live in `compute.ts` next to a Vitest test, so logic stays testable without React.
+- All UI strings go through `t()` from `src/i18n` backed by `en.json`, so new languages can be added later.
+- Numbers are formatted only via `src/lib/format.ts` (Intl.NumberFormat), so settings for currency/number format apply everywhere.
+- No backend: settings and recent calculators persist in localStorage with try/catch.
