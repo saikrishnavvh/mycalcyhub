@@ -14,3 +14,4 @@
 - [ ] Installable app + offline
 - [ ] Favourites pinned on home; settings as bottom sheet on phones
 - [ ] Decide: home search box (spec) vs top-only search (user asked earlier) — kept top-only
+- [x] Improve left nav filter box UI

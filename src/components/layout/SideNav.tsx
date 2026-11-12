@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Search, X } from "lucide-react";
 import { Badge, Input, cn } from "@/design-system/minimal-and-sleek-69c4a4";
 import { calculatorPath, categories, groupBySubcategory, inCategory } from "@/calculators/registry";
 import type { CategoryId } from "@/calculators/types";
@@ -54,7 +54,19 @@ export function SideNav({ open, onClose }: { open: boolean; onClose: () => void 
       <button type="button" aria-label={t("nav.collapse")} onClick={onClose} className="fixed inset-0 z-40 bg-foreground/20 lg:hidden print:hidden" />
       <nav aria-label={t("nav.menu")}
         className="fixed inset-y-0 left-0 z-50 flex w-72 flex-col gap-4 overflow-y-auto border-r border-border bg-background p-4 shadow-float lg:sticky lg:top-16 lg:z-auto lg:h-[calc(100vh-4rem)] lg:w-64 lg:shadow-none print:hidden">
-        <Input type="search" aria-label={t("nav.filter")} placeholder={t("nav.filter")} value={query} onChange={(e) => setQuery(e.target.value)} />
+        <div className="sticky top-0 z-10 -mx-4 -mt-4 border-b border-border bg-background px-4 pb-3 pt-4">
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+            <Input type="text" aria-label={t("nav.filter")} placeholder={t("nav.filter")} value={query} onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Escape") setQuery(""); }} className="pl-9 pr-10" />
+            {query && (
+              <button type="button" aria-label={t("nav.clearFilter")} onClick={() => setQuery("")}
+                className="absolute right-1 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors duration-(--duration-quick) ease-(--ease-gentle) hover:bg-foreground/[0.04] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                <X className="size-4" aria-hidden />
+              </button>
+            )}
+          </div>
+        </div>
         <div className="flex flex-col gap-2">
           {categories.map((cat) => {
             const h = HUE[cat.id];

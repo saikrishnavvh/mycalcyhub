@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronRight, ChevronUp, Download, Link2, Printer, RotateCcw } from "lucide-react";
-import { Button, Card, CardHeader, CardTitle } from "@/design-system/minimal-and-sleek-69c4a4";
+import { ChevronRight, ChevronUp, Download, ImageIcon, Link2, Printer, RotateCcw } from "lucide-react";
+import { Button, Card, CardDescription, CardHeader, CardTitle } from "@/design-system/minimal-and-sleek-69c4a4";
 import type { CalculatorDefinition, FieldErrors } from "@/calculators/types";
 import { getById, getCategory } from "@/calculators/registry";
 import { t } from "@/i18n";
@@ -16,6 +16,8 @@ export function CalculatorShell({ calc }: { calc: CalculatorDefinition }) {
   const [input, setInput] = useState(calc.defaults);
   const [expanded, setExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [imgState, setImgState] = useState<"idle" | "busy" | "copied" | "saved">("idle");
+  const resultsRef = useRef<HTMLDivElement>(null);
   const lastGood = useRef<{ input: unknown; result: unknown } | null>(null);
 
   useEffect(() => { pushRecent(calc.id); }, [calc.id]);
@@ -51,6 +53,31 @@ export function CalculatorShell({ calc }: { calc: CalculatorDefinition }) {
     try { await navigator.clipboard.writeText(window.location.href); setCopied(true); setTimeout(() => setCopied(false), 1500); } catch { /* ignore */ }
   };
 
+  const copyImage = () => {
+    const node = resultsRef.current;
+    if (!node) return;
+    setImgState("busy");
+    const bg = getComputedStyle(document.body).backgroundColor;
+    const blobP = import("html-to-image").then(({ toBlob }) =>
+      toBlob(node, { pixelRatio: 2, backgroundColor: bg, skipFonts: true, filter: (n) => !(n instanceof HTMLElement && n.hasAttribute("data-no-capture")) }),
+    ).then((blob) => { if (!blob) throw new Error("no image"); return blob; });
+    const done = (s: "copied" | "saved" | "idle") => { setImgState(s); if (s !== "idle") setTimeout(() => setImgState("idle"), 1800); };
+    const download = async () => {
+      try {
+        const url = URL.createObjectURL(await blobP);
+        Object.assign(document.createElement("a"), { href: url, download: `${calc.slug}.png` }).click();
+        URL.revokeObjectURL(url);
+        done("saved");
+      } catch { done("idle"); }
+    };
+    // ClipboardItem must be created synchronously within the click (Safari); fall back to download if the browser refuses or stalls.
+    try {
+      const write = navigator.clipboard.write([new ClipboardItem({ "image/png": blobP })]);
+      const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 4000));
+      Promise.race([write, timeout]).then(() => done("copied"), download);
+    } catch { void download(); }
+  };
+
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 pb-32 pt-8 sm:px-6 lg:pb-12">
       <header className="flex flex-col gap-3">
@@ -77,12 +104,14 @@ export function CalculatorShell({ calc }: { calc: CalculatorDefinition }) {
         </Card>
 
         <div className="flex flex-col gap-6 lg:sticky lg:top-20">
-          <Card variant="soft" padding="lg">
-            <CardHeader className="mb-6"><CardTitle>{t("shell.results")}</CardTitle></CardHeader>
+          <Card ref={resultsRef} variant="soft" padding="lg">
+            <CardHeader className="mb-6"><CardTitle>{t("shell.results")}</CardTitle><CardDescription>{calc.name} · {category.name}</CardDescription></CardHeader>
             <div aria-live="polite" aria-atomic="true">
               <Results input={shown.input} result={shown.result} ctx={ctx} />
             </div>
-            <div className="mt-6 flex flex-wrap gap-2 border-t border-border pt-4 print:hidden">
+            <p className="mt-6 text-xs text-muted-foreground">CalcHub · {calc.name}</p>
+            <div data-no-capture className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4 print:hidden">
+              <Button variant="secondary" size="sm" onClick={copyImage} loading={imgState === "busy"}><ImageIcon className="size-4" aria-hidden />{imgState === "copied" ? t("shell.imageCopied") : imgState === "saved" ? t("shell.imageSaved") : t("shell.copyImage")}</Button>
               {calc.exportRows && <Button variant="secondary" size="sm" onClick={exportCsv}><Download className="size-4" aria-hidden />{t("shell.exportCsv")}</Button>}
               <Button variant="ghost" size="sm" onClick={() => window.print()}><Printer className="size-4" aria-hidden />{t("shell.print")}</Button>
               <Button variant="ghost" size="sm" onClick={copyLink}><Link2 className="size-4" aria-hidden />{copied ? t("shell.copied") : t("shell.copyLink")}</Button>
