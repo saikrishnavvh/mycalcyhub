@@ -2,6 +2,8 @@
 
 ## Done
 - [x] Side menu, currency symbols, top-only search
+- [x] Clearer left menu hierarchy
+- [x] Home shows last 3 recent calculators
 - [x] 21 calculators: Loan EMI, SIP, Lumpsum, CAGR, Inflation, FD, RD, Compound & Simple interest, GST, Discount, Percentage, 7 unit converters, Age, Date difference, Add days
 
 ## Open (from spec sections 3–5)

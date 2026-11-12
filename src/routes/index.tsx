@@ -4,7 +4,7 @@ import { calculators, categories, getById, groupBySubcategory } from "@/calculat
 import type { CalculatorDefinition } from "@/calculators/types";
 import { CalculatorCard } from "@/components/calc/CalculatorCard";
 import { t } from "@/i18n";
-import { getRecent } from "@/lib/storage";
+import { getRecent, latestRecent } from "@/lib/storage";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [recent, setRecent] = useState<CalculatorDefinition[]>([]);
-  useEffect(() => setRecent(getRecent().map(getById).filter((c): c is CalculatorDefinition => !!c)), []);
+  useEffect(() => setRecent(latestRecent(getRecent()).map(getById).filter((c): c is CalculatorDefinition => !!c)), []);
   const results = calculators;
 
   return (

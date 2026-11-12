@@ -25,3 +25,6 @@ export function getRecent(): string[] {
 export function pushRecent(id: string) {
   writeJSON(RECENT_KEY, [id, ...getRecent().filter((x) => x !== id)].slice(0, 6));
 }
+
+/** The `n` most recently opened ids, newest first. */
+export const latestRecent = (ids: string[], n = 3) => ids.slice(0, n);
