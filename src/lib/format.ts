@@ -57,3 +57,10 @@ export function currencySymbol(currency = "USD", fmt: NumberFormatId = "en"): st
     return currency;
   }
 }
+
+/** Formats an ISO date (YYYY-MM-DD) as a long local date, read in UTC so it never shifts a day. */
+export function formatDate(iso: string, fmt: NumberFormatId = "en"): string {
+  const d = new Date(`${iso}T00:00:00Z`);
+  if (Number.isNaN(d.getTime())) return "—";
+  return new Intl.DateTimeFormat(localeFor(fmt), { dateStyle: "full", timeZone: "UTC" }).format(d);
+}

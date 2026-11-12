@@ -2,11 +2,17 @@ import { t } from "@/i18n";
 import type { CalculatorDefinition, CategoryId } from "./types";
 import { loanEmi } from "./loan-emi";
 import { percentage } from "./percentage";
+import { financeMore } from "./finance-more";
+import { unitConverters } from "./units";
+import { dateTools } from "./dates";
 
 /** THE list of calculators. Routing, home, categories, search, related links and the sitemap all read from here. */
 export const calculators: CalculatorDefinition[] = [
   loanEmi,
+  ...financeMore,
   percentage,
+  ...unitConverters,
+  ...dateTools,
 ];
 
 export const categories: { id: CategoryId; name: string; description: string }[] = [
