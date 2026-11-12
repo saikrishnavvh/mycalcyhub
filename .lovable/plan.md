@@ -24,3 +24,8 @@ Mobile drawer gets the same layout and still closes after picking a calculator.
 - Replace `<details>` with a button-toggled list (`aria-expanded`), state in localStorage with try/catch; default open = category from current route.
 - Design-system tokens only (`text-foreground`, `text-muted-foreground`, `bg-surface`, `border-accent`), uses design-system `Input` for the filter.
 - Browser check on desktop and mobile widths.
+
+## Also: last 3 recent calculators on the home page
+- Home already shows a "Recently used" row from your history, but up to 6. Change it to show only the **3 most recently opened**, newest first, as one row of cards (stacks on phones).
+- Hidden until you've opened at least one calculator.
+- Technical: slice `getRecent()` to 3 in `src/routes/index.tsx`; add a small test that the list keeps newest-first order and the home shows max 3. Add this task to `roadmap.md`.
