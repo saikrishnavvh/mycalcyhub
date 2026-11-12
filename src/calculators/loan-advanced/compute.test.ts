@@ -17,6 +17,15 @@ describe("advanced loan EMI", () => {
     expect(r.interestSaved).toBeGreaterThan(0);
     expect(r.monthly.at(-1)!.balance).toBe(0);
   });
+  it("reports total payable with and without prepayment", () => {
+    const plain = computeLoanAdvanced(base);
+    expect(plain.baseTotalPaid).toBeCloseTo(2_082_775.76, 2);
+    expect(plain.baseTotalPaid).toBeCloseTo(plain.totalPaid, 6);
+    const extra = computeLoanAdvanced({ ...base, monthlyExtra: 2000 });
+    expect(extra.baseTotalPaid).toBeCloseTo(2_082_775.76, 2);
+    expect(extra.totalPaid).toBeLessThan(extra.baseTotalPaid);
+    expect(extra.baseTotalPaid - extra.totalPaid).toBeCloseTo(extra.interestSaved, 6);
+  });
   it("reduce-EMI mode keeps tenure and lowers EMI", () => {
     const r = computeLoanAdvanced({ ...base, oneTime: 200_000, oneTimeMonth: 12, mode: "emi" });
     expect(r.months).toBe(240);

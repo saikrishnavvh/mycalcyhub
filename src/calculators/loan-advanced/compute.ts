@@ -19,7 +19,7 @@ export type LoanAdvancedInput = z.infer<typeof loanAdvancedSchema>;
 export interface AdvRow extends ScheduleRow { prepayment: number; payment: number }
 export interface LoanAdvancedResult {
   emi: number; months: number; totalInterest: number; totalPaid: number; totalPrepaid: number;
-  baseMonths: number; baseInterest: number; interestSaved: number; monthsSaved: number; lastEmi: number;
+  baseMonths: number; baseInterest: number; baseTotalPaid: number; interestSaved: number; monthsSaved: number; lastEmi: number;
   monthly: AdvRow[]; yearly: AdvRow[];
 }
 
@@ -52,7 +52,7 @@ export function computeLoanAdvanced(i: LoanAdvancedInput): LoanAdvancedResult {
   const totalPrepaid = monthly.reduce((a, x) => a + x.prepayment, 0);
   return {
     emi: base, months: monthly.length, totalInterest, totalPaid: i.principal + totalInterest, totalPrepaid,
-    baseMonths: n, baseInterest, interestSaved: Math.max(0, baseInterest - totalInterest), monthsSaved: n - monthly.length,
+    baseMonths: n, baseInterest, baseTotalPaid: i.principal + baseInterest, interestSaved: Math.max(0, baseInterest - totalInterest), monthsSaved: n - monthly.length,
     lastEmi: pay, monthly, yearly,
   };
 }

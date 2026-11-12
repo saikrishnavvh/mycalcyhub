@@ -43,6 +43,10 @@ function Results({ result, input, ctx }: ResultsProps<LoanAdvancedInput, LoanAdv
     <div className="flex flex-col gap-6">
       <Stat emphasis label={t("loanEmi.emi")} value={m(result.emi)} compact={c(result.emi)} />
       <div className="grid grid-cols-2 gap-6">
+        <Stat label={t(`${K}.totalWithout`)} value={m(result.baseTotalPaid)} compact={c(result.baseTotalPaid)} hint={t(`${K}.totalWithout.hint`)} />
+        <Stat label={t(`${K}.totalWith`)} value={m(result.totalPaid)} compact={c(result.totalPaid)} hint={t(`${K}.totalWith.hint`)} />
+      </div>
+      <div className="grid grid-cols-2 gap-6">
         <Stat label={t(`${K}.interestSaved`)} value={m(result.interestSaved)} compact={c(result.interestSaved)} />
         <Stat label={t(`${K}.newTenure`)} value={years(result.months)} />
         <Stat label={t("loanEmi.totalInterest")} value={m(result.totalInterest)} compact={c(result.totalInterest)} />
