@@ -453,5 +453,22 @@
   "ab.faq.1.q": "What confidence level should I use?",
   "ab.faq.1.a": "95% is the common standard. 90% gives quicker answers with more false positives; 99% is stricter and needs more traffic.",
   "ab.faq.2.q": "Can I stop a test as soon as it's significant?",
-  "ab.faq.2.a": "Better not. Decide your sample size beforehand; peeking and stopping early inflates false positives."
+  "ab.faq.2.a": "Better not. Decide your sample size beforehand; peeking and stopping early inflates false positives.",
+  "guide.sipLumpsum.title": "SIP vs lumpsum: how to compare them with a calculator",
+  "guide.sipLumpsum.description": "See how a monthly SIP and a one-time lumpsum grow, the formulas behind each, and a worked example you can check with free calculators.",
+  "guide.sipLumpsum.intro": "A SIP puts in a fixed amount every month. A lumpsum puts in the whole amount on day one. This guide shows how each is calculated so you can compare them with your own numbers.",
+  "guide.sipLumpsum.what.h": "What is the difference?",
+  "guide.sipLumpsum.what.p": "With a SIP, each monthly payment grows only from the month it is added, so later payments have less time to grow. With a lumpsum, all of the money grows for the full period. The same yearly return therefore gives different end values.",
+  "guide.sipLumpsum.maths.h": "How the calculators work it out",
+  "guide.sipLumpsum.maths.p": "Lumpsum: future value = amount × (1 + yearly rate)^years. SIP: future value = monthly amount × ((1 + r)^n − 1) ÷ r × (1 + r), where r is the yearly rate ÷ 12 and n is the number of months. The SIP formula assumes each payment is made at the start of the month.",
+  "guide.sipLumpsum.example.h": "Worked example",
+  "guide.sipLumpsum.example.p": "Assume a 12% yearly return for 10 years. A SIP of 10,000 a month puts in 12,00,000 in total and grows to about 23,23,391. A lumpsum of 12,00,000 on day one grows to about 37,27,018. The lumpsum ends higher only because all the money was invested longer, under the assumption of a steady return.",
+  "guide.sipLumpsum.when.h": "Which calculator should you use?",
+  "guide.sipLumpsum.when.p": "Use the SIP calculator if you plan to invest from monthly income. Use the lumpsum calculator if you already have the full amount. To compare fairly, enter the same total amount, period and expected return in both. Real returns vary from year to year, so treat both results as estimates.",
+  "guide.sipLumpsum.try.h": "Try it with your numbers",
+  "guide.sipLumpsum.try.sip": "SIP calculator",
+  "guide.sipLumpsum.try.lumpsum": "Lumpsum calculator",
+  "guide.sipLumpsum.try.inflation": "Inflation calculator (see what the result is worth in today's money)",
+  "guide.sipLumpsum.note": "This guide explains the maths only. It is not investment advice.",
+  "footer.guide": "SIP vs lumpsum guide"
 }

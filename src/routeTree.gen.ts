@@ -17,6 +17,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as CategoryIndexRouteImport } from './routes/$category.index'
 import { Route as CategorySlugRouteImport } from './routes/$category.$slug'
+import { Route as GuidesSipVsLumpsumRouteImport } from './routes/guides.sip-vs-lumpsum'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +59,11 @@ const CategorySlugRoute = CategorySlugRouteImport.update({
   path: '/$category/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesSipVsLumpsumRoute = GuidesSipVsLumpsumRouteImport.update({
+  id: '/guides/sip-vs-lumpsum',
+  path: '/guides/sip-vs-lumpsum',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/$category/$slug': typeof CategorySlugRoute
+  '/guides/sip-vs-lumpsum': typeof GuidesSipVsLumpsumRoute
   '/$category/': typeof CategoryIndexRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/$category/$slug': typeof CategorySlugRoute
+  '/guides/sip-vs-lumpsum': typeof GuidesSipVsLumpsumRoute
   '/$category': typeof CategoryIndexRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/$category/$slug': typeof CategorySlugRoute
+  '/guides/sip-vs-lumpsum': typeof GuidesSipVsLumpsumRoute
   '/$category/': typeof CategoryIndexRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/$category/$slug'
+    | '/guides/sip-vs-lumpsum'
     | '/$category/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/$category/$slug'
+    | '/guides/sip-vs-lumpsum'
     | '/$category'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/$category/$slug'
+    | '/guides/sip-vs-lumpsum'
     | '/$category/'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   CategorySlugRoute: typeof CategorySlugRoute
+  GuidesSipVsLumpsumRoute: typeof GuidesSipVsLumpsumRoute
   CategoryIndexRoute: typeof CategoryIndexRoute
 }
 
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategorySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/sip-vs-lumpsum': {
+      id: '/guides/sip-vs-lumpsum'
+      path: '/guides/sip-vs-lumpsum'
+      fullPath: '/guides/sip-vs-lumpsum'
+      preLoaderRoute: typeof GuidesSipVsLumpsumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   CategorySlugRoute: CategorySlugRoute,
+  GuidesSipVsLumpsumRoute: GuidesSipVsLumpsumRoute,
   CategoryIndexRoute: CategoryIndexRoute,
 }
 export const routeTree = rootRouteImport
