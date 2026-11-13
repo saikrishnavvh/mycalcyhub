@@ -59,6 +59,7 @@
   "footer.terms": "Terms",
   "footer.disclaimerLink": "Disclaimer",
   "footer.github": "GitHub",
+  "footer.visits": "{count} visits",
   "footer.disclaimer": "Results are estimates for information only and are not financial advice.",
   "notFound.title": "Page not found",
   "notFound.body": "That page doesn't exist. Try searching for a calculator instead.",

@@ -38,3 +38,4 @@ use the editor.
 
 - Left side menu lives in `src/components/layout/SideNav.tsx` and reads the registry tree; open/closed state is owned by `__root.tsx`, so every page shares one toggle.
 - Formula-only calculators are built with `simpleCalculator()` in `src/calculators/kit/simple.tsx`; grouped folders (finance-more, units, dates) export arrays spread into the registry, so similar calculators share one component.
+- Visit counter uses a free external counting service (abacus.jasoncameron.dev) from the browser, counting each browser once per 6 hours, so the app stays backend-free.
