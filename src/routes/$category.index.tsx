@@ -24,7 +24,7 @@ function CategoryPage() {
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-12 sm:px-6">
       <header className="flex flex-col gap-2">
-        <h1 className="text-4xl font-semibold tracking-tight">{cat.name}</h1>
+        <h1 className="text-4xl font-semibold tracking-tight">{cat.name} calculators</h1>
         <p className="text-muted-foreground">{cat.description} · {t("category.count", { n: list.length })}</p>
       </header>
       {groupBySubcategory(list).map(([sub, items]) => (

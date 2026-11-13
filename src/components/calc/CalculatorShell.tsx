@@ -88,7 +88,7 @@ export function CalculatorShell({ calc }: { calc: CalculatorDefinition }) {
           <ChevronRight className="size-3.5" aria-hidden />
           <span className="text-foreground" aria-current="page">{calc.name}</span>
         </nav>
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{calc.name}</h1>
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{/calculator|converter/i.test(calc.name) ? calc.name : `${calc.name} calculator`}</h1>
         <p className="max-w-2xl text-muted-foreground">{calc.shortDescription}</p>
       </header>
 

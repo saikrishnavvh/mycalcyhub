@@ -30,7 +30,7 @@ export function Header({ onToggleMenu, menuOpen }: { onToggleMenu: () => void; m
           <span className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground"><Calculator className="size-4" aria-hidden /></span>
           <span className="hidden sm:inline">{config.appName}</span>
         </Link>
-        <button type="button" onClick={() => setPalette(true)}
+        <button type="button" aria-label={t("palette.title")} onClick={() => setPalette(true)}
           className="ml-auto flex h-11 min-w-0 flex-1 items-center gap-2 rounded-md border border-input bg-card px-3 text-sm text-muted-foreground transition-colors hover:border-muted-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:max-w-sm">
           <Search className="size-4" aria-hidden />
           <span className="flex-1 truncate text-left">{t("nav.search")}</span>
