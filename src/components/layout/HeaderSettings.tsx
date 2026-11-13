@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { Check, Coins, Hash, Monitor, Moon, Sun } from "lucide-react";
+import { Check, Hash, Monitor, Moon, Sun } from "lucide-react";
 import { Input, cn } from "@/design-system/minimal-and-sleek-69c4a4";
 import { t } from "@/i18n";
 import { listCurrencies } from "@/lib/currencies";
-import { NUMBER_FORMATS } from "@/lib/format";
+import { NUMBER_FORMATS, currencySymbol } from "@/lib/format";
 import { useSettings, type Theme } from "@/lib/settings";
 
 const iconBtn = "flex size-11 items-center justify-center rounded-md text-muted-foreground transition-colors duration-(--duration-quick) ease-(--ease-gentle) hover:bg-foreground/[0.04] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring aria-expanded:bg-foreground/[0.04] aria-expanded:text-foreground";
@@ -42,6 +42,13 @@ function Option({ active, onClick, children }: { active: boolean; onClick: () =>
   );
 }
 
+/** Shows the active currency's symbol (₹, $, €); falls back to its short code when no symbol exists. */
+function CurrencyMark({ code, fmt }: { code: string; fmt: Parameters<typeof currencySymbol>[1] }) {
+  const sym = currencySymbol(code, fmt);
+  const short = sym.length <= 2;
+  return <span aria-hidden className={cn("font-semibold tabular-nums leading-none", short ? "text-lg" : "font-mono text-xs")}>{short ? sym : code}</span>;
+}
+
 const THEMES: { value: Theme; icon: typeof Sun }[] = [
   { value: "light", icon: Sun },
   { value: "dark", icon: Moon },
@@ -59,7 +66,7 @@ export function HeaderSettings() {
 
   return (
     <div className="flex items-center">
-      <IconMenu label={`${t("settings.currency")}: ${s.currency}`} icon={<Coins className="size-5" aria-hidden />}>
+      <IconMenu label={`${t("settings.currency")}: ${s.currency}`} icon={<CurrencyMark code={s.currency} fmt={s.numberFormat} />}>
         {(close) => (
           <div className="flex flex-col gap-2">
             <Input autoFocus size="sm" aria-label={t("settings.currencySearch")} placeholder={t("settings.currencySearch")} value={q} onChange={(e) => setQ(e.target.value)} />
