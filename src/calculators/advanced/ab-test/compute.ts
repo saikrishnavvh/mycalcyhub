@@ -37,8 +37,8 @@ export function computeAb(i: AbInput): AbResult {
   const rateB = i.conversionsB / i.visitorsB;
   const seA = Math.sqrt((rateA * (1 - rateA)) / i.visitorsA);
   const seB = Math.sqrt((rateB * (1 - rateB)) / i.visitorsB);
-  const pooled = (i.conversionsA + i.conversionsB) / (i.visitorsA + i.visitorsB);
-  const se = Math.sqrt(pooled * (1 - pooled) * (1 / i.visitorsA + 1 / i.visitorsB));
+  // Unpooled standard error, same method as abtestguide.com, so results match that reference.
+  const se = Math.sqrt(seA * seA + seB * seB);
   const z = se > 0 ? (rateB - rateA) / se : 0;
   const p = i.sides === "2" ? 2 * (1 - normCdf(Math.abs(z))) : 1 - normCdf(z);
   const alpha = 1 - Number(i.confidence) / 100;

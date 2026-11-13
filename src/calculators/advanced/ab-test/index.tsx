@@ -31,13 +31,15 @@ function Inputs({ value, onChange, errors, ctx }: InputsProps<AbInput>) {
   );
 }
 
+/** Tiny p-values would round to "0"; show them as "< 0.0001" instead. */
+const pValue = (p: number, fmt: Parameters<typeof formatNumber>[1]) => (p < 0.0001 ? `< ${formatNumber(0.0001, fmt, 4)}` : formatNumber(p, fmt, 4));
 const pct = (v: number, fmt: Parameters<typeof formatNumber>[1]) => `${formatNumber(v * 100, fmt, 2)}%`;
 
 function Results({ input, result, ctx }: ResultsProps<AbInput, AbResult>) {
   const fmt = ctx.numberFormat;
   return (
     <div className="flex flex-col gap-6">
-      <Stat emphasis label={t("ab.p")} value={formatNumber(result.p, fmt, 4)} />
+      <Stat emphasis label={t("ab.p")} value={pValue(result.p, fmt)} />
       <p className="text-sm font-medium">{t(`ab.verdict.${result.verdict}`, { c: input.confidence })}</p>
       <div className="grid grid-cols-2 gap-6">
         <Stat label={t("ab.rateA")} value={pct(result.rateA, fmt)} />
@@ -91,7 +93,7 @@ export const abTest: CalculatorDefinition<AbInput, AbResult> = {
   Inputs,
   Results,
   Charts,
-  summary: (r, ctx) => ({ label: t("ab.p"), value: formatNumber(r.p, ctx.numberFormat, 4) }),
+  summary: (r, ctx) => ({ label: t("ab.p"), value: pValue(r.p, ctx.numberFormat) }),
   seo: {
     title: t("ab.seo.title"),
     description: t("ab.seo.description"),
