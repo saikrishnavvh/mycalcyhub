@@ -3,7 +3,7 @@ import type { LucideIcon } from "lucide-react";
 import type { ZodType } from "zod";
 import type { NumberFormatId } from "@/lib/format";
 
-export type CategoryId = "finance" | "converters";
+export type CategoryId = "finance" | "converters" | "advanced";
 
 /** Formatting context passed to compute() and components. */
 export interface CalcContext { currency: string; numberFormat: NumberFormatId }

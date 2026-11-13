@@ -14,9 +14,10 @@ const OPEN_KEY = "calchub:nav-open";
  * share it, so colour alone tells you which branch of the tree you are in:
  * sage = Finance, amber = Converters & Date.
  */
-const HUE: Record<CategoryId, { marker: string; tint: string; rule: string; badge: "success" | "warning" }> = {
+const HUE: Record<CategoryId, { marker: string; tint: string; rule: string; badge: "success" | "warning" | "neutral" }> = {
   finance: { marker: "bg-accent", tint: "bg-accent/[0.07]", rule: "border-accent", badge: "success" },
   converters: { marker: "bg-warning", tint: "bg-warning/[0.07]", rule: "border-warning", badge: "warning" },
+  advanced: { marker: "bg-foreground", tint: "bg-foreground/[0.05]", rule: "border-foreground", badge: "neutral" },
 };
 
 /** Third level: plain text, so the coloured levels above it read as the structure. */

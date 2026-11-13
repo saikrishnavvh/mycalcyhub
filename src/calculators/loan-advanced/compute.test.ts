@@ -33,3 +33,11 @@ describe("advanced loan EMI", () => {
     expect(r.totalPrepaid).toBe(200_000);
   });
 });
+
+import { computeLoanAdvanced as cla } from "./compute";
+it("no-prepayment balance line ends at zero after the full tenure", () => {
+  const r = cla({ principal: 1_000_000, rate: 8.5, tenureYears: 20, monthlyExtra: 0, yearlyExtra: 0, oneTime: 0, oneTimeMonth: 12, mode: "tenure" });
+  expect(r.baseYearlyBalance).toHaveLength(20);
+  expect(r.baseYearlyBalance[19]).toBeCloseTo(0, 2);
+  expect(r.baseYearlyBalance[0]).toBeCloseTo(r.yearly[0]!.balance, 2);
+});

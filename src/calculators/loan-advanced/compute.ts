@@ -21,6 +21,8 @@ export interface LoanAdvancedResult {
   emi: number; months: number; totalInterest: number; totalPaid: number; totalPrepaid: number;
   baseMonths: number; baseInterest: number; baseTotalPaid: number; interestSaved: number; monthsSaved: number; lastEmi: number;
   monthly: AdvRow[]; yearly: AdvRow[];
+  /** End-of-year balance if no prepayments were made. */
+  baseYearlyBalance: number[];
 }
 
 export function computeLoanAdvanced(i: LoanAdvancedInput): LoanAdvancedResult {
@@ -48,11 +50,17 @@ export function computeLoanAdvanced(i: LoanAdvancedInput): LoanAdvancedResult {
     const sum = (k: keyof AdvRow) => s.reduce((a, x) => a + x[k], 0);
     yearly.push({ period: y + 1, principal: sum("principal"), interest: sum("interest"), prepayment: sum("prepayment"), payment: sum("payment"), balance: s[s.length - 1]!.balance });
   }
+  const baseYearlyBalance: number[] = [];
+  for (let y = 1; y * 12 <= n || (y - 1) * 12 < n; y++) {
+    const k = Math.min(n, y * 12);
+    baseYearlyBalance.push(r === 0 ? Math.max(0, i.principal - base * k) : Math.max(0, i.principal * Math.pow(1 + r, k) - base * ((Math.pow(1 + r, k) - 1) / r)));
+    if (k >= n) break;
+  }
   const totalInterest = monthly.reduce((a, x) => a + x.interest, 0);
   const totalPrepaid = monthly.reduce((a, x) => a + x.prepayment, 0);
   return {
     emi: base, months: monthly.length, totalInterest, totalPaid: i.principal + totalInterest, totalPrepaid,
     baseMonths: n, baseInterest, baseTotalPaid: i.principal + baseInterest, interestSaved: Math.max(0, baseInterest - totalInterest), monthsSaved: n - monthly.length,
-    lastEmi: pay, monthly, yearly,
+    lastEmi: pay, monthly, yearly, baseYearlyBalance,
   };
 }

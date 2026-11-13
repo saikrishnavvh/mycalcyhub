@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Calculator } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Button } from "@/design-system/minimal-and-sleek-69c4a4";
 import { t } from "@/i18n";
 import { formatCompact, formatMoney, currencySymbol, formatNumber } from "@/lib/format";
@@ -62,13 +63,88 @@ function Results({ result, input, ctx }: ResultsProps<LoanAdvancedInput, LoanAdv
   );
 }
 
-function Charts({ result, ctx }: ResultsProps<LoanAdvancedInput, LoanAdvancedResult>) {
+function Charts({ input, result, ctx }: ResultsProps<LoanAdvancedInput, LoanAdvancedResult>) {
   const [view, setView] = useState<"monthly" | "yearly">("yearly");
   const [all, setAll] = useState(false);
   const rows = view === "monthly" ? result.monthly : result.yearly;
   const shown = all ? rows : rows.slice(0, 12);
   const m = (v: number) => formatMoney(v, ctx.currency, ctx.numberFormat, 0);
+  const total = input.principal + result.totalInterest;
+  const pie = [
+    { name: t(`${K}.chart.principal`), value: Math.max(0, input.principal - result.totalPrepaid), dot: "bg-primary", fill: "var(--color-primary)" },
+    { name: t(`${K}.chart.prepaid`), value: result.totalPrepaid, dot: "bg-warning", fill: "var(--color-warning)" },
+    { name: t(`${K}.chart.interest`), value: result.totalInterest, dot: "bg-accent", fill: "var(--color-accent)" },
+  ].filter((p) => p.value > 0);
+  const years = Math.max(result.yearly.length, result.baseYearlyBalance.length);
+  const line = [{ period: 0, with: input.principal, without: input.principal }, ...Array.from({ length: years }, (_, k) => ({
+    period: k + 1, with: result.yearly[k]?.balance ?? 0, without: result.baseYearlyBalance[k] ?? 0,
+  }))];
+  const tick = { fill: "var(--color-muted-foreground)", fontSize: 12 };
+  const yFmt = (v: number) => formatCompact(v, ctx.numberFormat) ?? formatNumber(v, ctx.numberFormat, 0);
+  const tooltipStyle = { background: "var(--color-popover)", border: "1px solid var(--color-border)", borderRadius: "var(--radius)", color: "var(--color-popover-foreground)" };
+  const yearLabel = (l: unknown) => `${t("loanEmi.col.period.year")} ${l}`;
   return (
+    <div className="flex flex-col gap-12">
+      <section className="flex flex-col gap-4">
+        <h3 className="text-sm font-medium">{t(`${K}.chart.breakup`)}</h3>
+        <div className="flex items-center gap-6">
+          <div className="aspect-square w-40 shrink-0">
+            <ResponsiveContainer>
+              <PieChart>
+                <Pie data={pie} dataKey="value" innerRadius="62%" outerRadius="100%" stroke="none" isAnimationActive={false}>
+                  {pie.map((p) => <Cell key={p.name} fill={p.fill} />)}
+                </Pie>
+                <Tooltip formatter={(v: number) => m(v)} contentStyle={tooltipStyle} />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          <ul className="flex flex-col gap-3 text-sm">
+            {pie.map((p) => (
+              <li key={p.name} className="flex items-center gap-2">
+                <span aria-hidden className={`size-2.5 rounded-full ${p.dot}`} />
+                <span className="text-muted-foreground">{p.name}</span>
+                <span className="tabular-nums">{formatNumber((p.value / total) * 100, ctx.numberFormat, 1)}%</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <h3 className="text-sm font-medium">{t(`${K}.chart.balance`)}</h3>
+        <div className="h-64 w-full">
+          <ResponsiveContainer>
+            <LineChart data={line} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
+              <CartesianGrid stroke="var(--color-border)" vertical={false} />
+              <XAxis dataKey="period" tick={tick} stroke="var(--color-border)" />
+              <YAxis width={56} tick={tick} stroke="var(--color-border)" tickFormatter={yFmt} />
+              <Tooltip formatter={(v: number) => m(v)} labelFormatter={yearLabel} contentStyle={tooltipStyle} />
+              <Legend wrapperStyle={{ fontSize: 12 }} />
+              <Line name={t(`${K}.chart.without`)} type="monotone" dataKey="without" stroke="var(--color-muted-foreground)" strokeDasharray="4 4" strokeWidth={2} dot={false} isAnimationActive={false} />
+              <Line name={t(`${K}.chart.with`)} type="monotone" dataKey="with" stroke="var(--color-accent)" strokeWidth={2} dot={false} isAnimationActive={false} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <h3 className="text-sm font-medium">{t(`${K}.chart.yearly`)}</h3>
+        <div className="h-64 w-full">
+          <ResponsiveContainer>
+            <BarChart data={result.yearly} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
+              <CartesianGrid stroke="var(--color-border)" vertical={false} />
+              <XAxis dataKey="period" tick={tick} stroke="var(--color-border)" />
+              <YAxis width={56} tick={tick} stroke="var(--color-border)" tickFormatter={yFmt} />
+              <Tooltip formatter={(v: number) => m(v)} labelFormatter={yearLabel} contentStyle={tooltipStyle} cursor={{ fill: "var(--color-surface)" }} />
+              <Legend wrapperStyle={{ fontSize: 12 }} />
+              <Bar name={t(`${K}.chart.principal`)} dataKey="principal" stackId="a" fill="var(--color-primary)" isAnimationActive={false} />
+              <Bar name={t(`${K}.chart.prepaid`)} dataKey="prepayment" stackId="a" fill="var(--color-warning)" isAnimationActive={false} />
+              <Bar name={t(`${K}.chart.interest`)} dataKey="interest" stackId="a" fill="var(--color-accent)" isAnimationActive={false} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </section>
+
     <section className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-4">
         <h3 className="text-sm font-medium">{t("loanEmi.schedule")}</h3>
@@ -106,6 +182,7 @@ function Charts({ result, ctx }: ResultsProps<LoanAdvancedInput, LoanAdvancedRes
       )}
       <p className="text-xs text-muted-foreground">{t(`${K}.note`, { n: formatNumber(result.baseMonths, ctx.numberFormat, 0) })}</p>
     </section>
+    </div>
   );
 }
 
